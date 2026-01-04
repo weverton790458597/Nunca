@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>TradeWR - Trade</title>
+  <link rel="stylesheet" href="bem-vindo.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #1e1e1e;
+    }
+
+    .trade-container {
+      width: 360px;
+      height: 555px;
+      background-color: #2c2c2c;
+      padding: 15px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
+
+    .trade-logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      background-image: url('icon16.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .trade-header {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .trade-section {
+      width: 100%;
+      background-color: #3a3a3a;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+    }
+
+    .trade-section h3 {
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      font-weight: bold;
+      color: #81c784;
+    }
+
+    .trade-section p {
+      margin: 0;
+      font-size: 12px;
+      color: #ccc;
+    }
+
+    .trade-btn {
+      margin-top: auto;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      background-color: #4caf50;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    .trade-btn:hover {
+      background-color: #81c784;
+    }
+  </style>
+</head>
+<body>
+  <div class="trade-container">
+    <div class="trade-logo"></div>
+    <div class="trade-header">Bem-vindo ao TradeWR</div>
+
+    <div class="trade-section" id="estrategia1">
+      <h3>Tutoriais de Uso</h3>
+      <p>Se você é novo usuário, comece por aqui.</p>
+    </div>
+
+    <div class="trade-section" id="estrategia2">
+      <h3>Tabela de Gerenciamento de Risco</h3>
+      <p>Gerenciamento é o que vai te manter no mercado.</p>
+    </div>
+
+    <div class="trade-section" id="estrategia3">
+      <h3>Pagamentos</h3>
+      <p>Fique atento ao seu dia de vencimento.</p>
+    </div>
+
+    <button class="trade-btn" id="iniciarTrade">Iniciar Trade</button>
+  </div>
+
+  <script src="bem-vindo.js"></script>
+</body>
+</html>

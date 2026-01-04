@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Sinais</title>
+    <link rel="stylesheet" href="sinais.css">
+</head>
+<body>
+  <div id="overlayTela"> 
+    <div id="botao-voltar">Voltar</div>
+	<div id="alarmeToggle" title="Alarme" ><div class="bolinha"></div></div>
+    <div id="logo-container">
+  <img id="logo" src="icon16.png" alt="Logo">
+  <span id="site-nome">Acesse: tradewr.shop</span>  
+  
+   <!-- Botão de Configuração -->
+<button id="btnConfiguracao" style="
+    position: fixed;
+    top: 6px;
+    right: 10px;
+    z-index: 10000;
+    font-size: 18px;
+    padding: 2px 2px;
+    border-radius: 5px;
+    border: 2px solid #333; /* borda escura */
+    background: rgba(20, 20, 20, 0.8); /* vidro escuro */
+    color: white;
+    cursor: pointer;
+">⚙️</button>
+
+
+
+<!-- Overlay de Configurações (inicialmente escondido) -->
+<div id="configOverlay" style="
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.85);
+    z-index:9999;
+    color:white;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+">
+  <div style="background:#222; padding:20px; border-radius:8px; min-width:300px; max-width:90%;">
+    <h2 style="margin:0 0 8px 0;">Configurações</h2>
+
+    <!-- SEÇÃO: Telegram -->
+    <div style="margin-bottom:14px;">
+      <button id="btnInserirID" style="margin-top:6px;">ID Telegram</button>
+      <div id="telegramIdContainer" style="margin-top:10px; display:none;">
+          <input type="text" id="telegramIdInput" placeholder="Digite seu ID" style="width:170px; margin-right:6px;">
+          <button id="salvarTelegramIdBtn">Salvar</button>
+          <span id="telegramIdStatus" style="margin-left:8px;color:limegreen;"></span>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:8px; margin-top:12px;">
+      <button id="fecharConfig" style="flex:1;">Fechar</button>
+    </div>
+  </div>
+</div>
+
+ 
+ 
+<!-- Espaçador fantasma para manter o layout -->
+<div style="
+    position: fixed;
+    top: 6px;
+    right: 6px;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+"></div>
+
+  
+</div>
+ 
+  
+<div id="pairsControl">
+  <div class="pairWrap">
+    <div class="scoreDot" id="score-BTCUSDT">0x0</div>
+    <div class="winDot" id="dot-BTCUSDT">0%</div>
+    <button class="pairBtn" data-pair="BTCUSDT" title="Clique Para Ativar/Desativar a Paridade">BTCUSDT</button>
+  </div>
+
+  <div class="pairWrap">
+    <div class="scoreDot" id="score-ETHUSDT">0x0</div>
+    <div class="winDot" id="dot-ETHUSDT">0%</div>
+    <button class="pairBtn" data-pair="ETHUSDT" title="Clique Para Ativar/Desativar a Paridade">ETHUSDT</button>
+  </div>
+
+  <div class="pairWrap">
+    <div class="scoreDot" id="score-BNBUSDT">0x0</div>
+    <div class="winDot" id="dot-BNBUSDT">0%</div>
+    <button class="pairBtn" data-pair="BNBUSDT" title="Clique Para Ativar/Desativar a Paridade">BNBUSDT</button>
+  </div>
+
+  <div class="pairWrap">
+    <div class="scoreDot" id="score-SOLUSDT">0x0</div>
+    <div class="winDot" id="dot-SOLUSDT">0%</div>
+    <button class="pairBtn" data-pair="SOLUSDT" title="Clique Para Ativar/Desativar a Paridade">SOLUSDT</button>
+  </div>
+</div>
+
+
+    <div class="linha-superior">
+      <div class="indicador bb-superior">---</div>
+      <div class="indicador ema">---</div>
+	  <div class="indicador rsi" id="rsiValor">--</div>
+      <div class="indicador bb-inferior">---</div>
+    </div>
+     
+    <div class="linha-central">
+      <div id="ultimoFechamento">---</div>
+      <div id="sinalCentral">
+        <div class="seta" style="display:none;"></div>
+        <div class="textoSinal">Aguardando sinal</div>
+        <div class="horarioSinal"></div>
+      </div>
+      <div id="precoAtual">0.00</div>
+    </div>
+
+  <script src="modulo3.js"></script>
+  <script src="sinais.js"></script>
+
+</body>
+</html>

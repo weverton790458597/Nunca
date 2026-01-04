@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "TradeWR",
+  "version": "1.0.0",
+  "description": "Uma extensão avançada que gera sinais de trade em tempo real.",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon16.png"
+  },
+  "action": {
+    "default_popup": "sinais.html",
+    "default_icon": {
+      "16": "icon16.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "https://api.telegram.org/*",
+    "https://api.binance.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "sinais.html"
+  }
+}

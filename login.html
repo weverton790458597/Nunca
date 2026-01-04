@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login TradeWR</title>
+<style>
+ body {
+  margin: 0;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;        /* Centraliza de verdade */
+  width: 100vw;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #2b2b2b;
+  border-radius: 12px;
+  width: 360px;
+  height: 555px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.4);
+  
+  padding: 25px 20px;   /* antes 120px, agora ideal */
+  box-sizing: border-box;
+}
+
+/* LOGO */
+.logo {
+  margin-bottom: 18px;
+}
+
+.logo img {
+  width: 70px;
+  height: auto;
+  display: block;
+}
+
+/* TEXTO DE INSTRUÇÃO */
+.instrucao {
+  color: #ccc;
+  font-size: 13px;
+  margin-bottom: 14px;
+  text-align: center;
+  max-width: 280px;
+}
+
+/* INPUTS */
+input {
+  width: 220px;               /* maior e proporcional */
+  padding: 8px 32px 8px 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #3c3c3c;
+  box-sizing: border-box;
+}
+
+/* SENHA + ÍCONE */
+.senha-wrapper {
+  position: relative;
+  width: 220px;
+  display: flex;
+  align-items: center;
+}
+
+#toggleSenha {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  fill: #aaa;
+  width: 20px;
+  height: 20px;
+}
+
+/* BOTÃO */
+button {
+  width: 180px;
+  height: 45px;
+  margin-top: 15px;
+  background: linear-gradient(145deg, #5c5c5c, #484848);
+  color: white;
+  border: 1px solid #3c3c3c;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: linear-gradient(145deg, #6d6d6d, #5a5a5a);
+}
+
+/* ERRO */
+.erro {
+  color: red;
+  font-size: 12px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* LINK CADASTRO */
+.link-cadastro {
+  font-size: 12px;
+  margin-top: 14px;
+  text-align: center;
+  color: #aaa;
+}
+
+.link-cadastro a {
+  color: #3498db;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="icon16.png" alt="Logo">
+    </div>
+    <div class="instrucao">Digite seu login e senha</div>
+
+    <input type="text" id="email" placeholder="E-mail">
+
+    <div class="senha-wrapper">
+      <input type="password" id="senha" placeholder="Senha">
+      <svg id="toggleSenha" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 5c-7.633 0-12 7-12 7s4.367 7 12 7 12-7 12-7-4.367-7-12-7zm0 12a5 5 0 110-10 5 5 0 010 10zm0-8a3 3 0 100 6 3 3 0 000-6z"/>
+      </svg>
+    </div>
+
+    <button id="entrar">Entrar</button>
+
+    <div class="erro" id="erro"></div>
+
+    <div class="link-cadastro">
+      Ainda não possui cadastro? 
+      <a href="https://www.tradewr.shop/" target="_blank">Clique aqui</a>
+    </div>
+  </div>
+  <script src="login.js"></script>
+</body>
+</html>
