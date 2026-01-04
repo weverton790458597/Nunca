@@ -259,6 +259,14 @@ document.addEventListener('click', () => {
     }
   });
 
+	 // --------------------
+  // Toggle do alarme
+  // --------------------
+  alarmeToggle.addEventListener('click', () => {
+    alarmeAtivo = !alarmeAtivo;
+    alarmeToggle.classList.toggle('on', alarmeAtivo);
+    chrome.storage.local.set({ alarmeAtivo });
+  });
   // --------------------
   // Funções de cálculo e atualização
   // --------------------
@@ -824,4 +832,5 @@ setInterval(verificarWinRateAlert, 10000);
 
 
 })();
+
 
