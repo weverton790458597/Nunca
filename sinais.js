@@ -518,7 +518,7 @@ async function gerarSinal(symbol, velaIndex = null, precoAtual = null) {
     if (
         preco <= bb.inferior &&
         emaDentro &&
-        rsi <= 30
+        rsi <= 45
     ) {
         sinalAtual = 'compra';
     }
@@ -527,7 +527,7 @@ async function gerarSinal(symbol, velaIndex = null, precoAtual = null) {
     else if (
         preco >= bb.superior &&
         emaDentro &&
-        rsi >= 70
+        rsi >= 55
     ) {
         sinalAtual = 'venda';
     }
@@ -831,4 +831,5 @@ setInterval(verificarWinRateAlert, 10000);
 
 
 })();
+
 
