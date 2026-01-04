@@ -4,18 +4,27 @@ const entrarBtn = document.getElementById('entrar');
 const erro = document.getElementById('erro');
 const toggleSenha = document.getElementById('toggleSenha');
 
-// URL do seu App Script publicado como Web App
+// URL do Google Apps Script
 const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbx33kwB_uKur1d12uVrWrBPkcEM8m9-NhgL6RTzso9TPGb5wsHWV7S9OrfkAxeiAnnz0g/exec";
 
-// Ao abrir a extensão, verifica se já está logado
-chrome.storage.local.get(['logado', 'ultimaTela'], ({ logado, ultimaTela }) => {
-  if (logado) {
-    if (ultimaTela === 'bem-vindo') window.location.replace('bem-vindo.html');
-    else if (ultimaTela === 'overlay') window.location.replace('sinais.html');
-  }
-});
+// =====================================
+// 🔐 VERIFICA LOGIN AO ABRIR A PÁGINA
+// =====================================
+(function verificarLogin() {
+  const auth = JSON.parse(localStorage.getItem('auth'));
 
-// Função de login
+  if (auth?.logado) {
+    if (auth.ultimaTela === 'bem-vindo') {
+      window.location.replace('bem-vindo.html');
+    } else if (auth.ultimaTela === 'sinais') {
+      window.location.replace('sinais.html');
+    }
+  }
+})();
+
+// =====================================
+// 🚀 FUNÇÃO DE LOGIN
+// =====================================
 function validarLogin() {
   const email = emailInput.value.trim();
   const senha = senhaInput.value.trim();
@@ -33,16 +42,18 @@ function validarLogin() {
     .then(res => res.json())
     .then(data => {
       console.log('Resposta AppScript:', data);
-      if (data && data.success) {
-        // Guarda também o nome retornado pela API
-        chrome.storage.local.set({ 
-          logado: true, 
-          email, 
-          nome: data.nome || "", // pega o nome se existir
-          ultimaTela: 'bem-vindo' 
-        }, () => {
-          window.location.href = "bem-vindo.html";
-        });
+
+      if (data?.success) {
+        // Salva estado de login (WEB)
+        localStorage.setItem('auth', JSON.stringify({
+          logado: true,
+          email,
+          nome: data.nome || '',
+          ultimaTela: 'bem-vindo'
+        }));
+
+        window.location.href = 'bem-vindo.html';
+
       } else {
         erro.textContent = 'E-mail ou senha inválidos';
       }
@@ -53,10 +64,19 @@ function validarLogin() {
     });
 }
 
-// Listeners
+// =====================================
+// 🎯 LISTENERS
+// =====================================
 entrarBtn.addEventListener('click', validarLogin);
-emailInput.addEventListener('keypress', e => { if (e.key === 'Enter') senhaInput.focus(); });
-senhaInput.addEventListener('keypress', e => { if (e.key === 'Enter') validarLogin(); });
+
+emailInput.addEventListener('keypress', e => {
+  if (e.key === 'Enter') senhaInput.focus();
+});
+
+senhaInput.addEventListener('keypress', e => {
+  if (e.key === 'Enter') validarLogin();
+});
+
 toggleSenha.addEventListener('click', () => {
-  senhaInput.type = senhaInput.type === "password" ? "text" : "password";
+  senhaInput.type = senhaInput.type === 'password' ? 'text' : 'password';
 });
