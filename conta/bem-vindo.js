@@ -2,14 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Recupera auth do localStorage
   const auth = JSON.parse(localStorage.getItem('auth'));
 
-  // Se não estiver logado, volta para login
+  // 🔐 BLOQUEIO DE ACESSO DIRETO VIA URL
   if (!auth || !auth.logado) {
-    window.location.replace('index.html');
+    window.location.replace('/login/');
     return;
   }
 
-  // Marca última tela
-  auth.ultimaTela = 'bem-vindo';
+  // Marca última tela corretamente
+  auth.ultimaTela = 'conta';
   localStorage.setItem('auth', JSON.stringify(auth));
 
   // Exibe nome no header
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const iniciarTradeBtn = document.getElementById('iniciarTrade');
   if (iniciarTradeBtn) {
     iniciarTradeBtn.addEventListener('click', () => {
-      window.location.href = 'sinais.html';
+      window.location.href = '/sinais/';
     });
   }
 });
