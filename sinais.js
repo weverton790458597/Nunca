@@ -314,7 +314,7 @@ document.addEventListener('click', () => {
   ///////////////////////////////
    async function atualizarIndicadores(symbol, precoAtual) {
 
-  const data = await chrome.storage.sync.get({ enabledPairs: defaultPairs });
+  const data = await chromeGetPromise('sync', { enabledPairs: defaultPairs });
   if (!data.enabledPairs[symbol]) return; // corta indicador
 	
   const velasRecebidas = ativos[symbol].velas;
@@ -472,7 +472,7 @@ const COOLDOWN_MS = 600000; // ajuste se quiser 3s => 3000
 
 async function gerarSinal(symbol, velaIndex = null, precoAtual = null) {
 
-    const data = await chrome.storage.sync.get({ enabledPairs: defaultPairs });
+    const data = await chromeGetPromise('sync', { enabledPairs: defaultPairs });
     if (!data.enabledPairs[symbol]) return;
 
     const velasRecebidas = ativos[symbol].velas;
