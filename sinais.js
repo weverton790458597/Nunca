@@ -55,6 +55,7 @@ function chromeGetPromise(area, keys) {
   });
 }
 
+
 (() => {
   // --------------------
   // Configurações
@@ -238,7 +239,17 @@ window.enviarTelegram = function(msg) {
     compra: new Audio('/sounds/compra.mp3'),
     venda: new Audio('/sounds/venda.mp3')
   };
-
+// 🔓 Desbloqueia áudio após primeira interação do usuário
+document.addEventListener('click', () => {
+  Object.values(sons).forEach(s => {
+    try {
+      s.play().then(() => {
+        s.pause();
+        s.currentTime = 0;
+      });
+    } catch (e) {}
+  });
+}, { once: true });
   // --------------------
   // Carrega estado do alarme ao iniciar
   // --------------------
@@ -464,7 +475,7 @@ const COOLDOWN_MS = 600000; // ajuste se quiser 3s => 3000
 
 async function gerarSinal(symbol, velaIndex = null, precoAtual = null) {
 
-    const data = await chrome.storage.sync.get({ enabledPairs: defaultPairs });
+   const data = await chromeGetPromise('sync', { enabledPairs: defaultPairs });
     if (!data.enabledPairs[symbol]) return;
 
     const velasRecebidas = ativos[symbol].velas;
