@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>TradeWR — Alpha Signals</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="icon16.png">
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="inicio.css">
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- Backgrounds -->
+    <div class="bg-gradient" aria-hidden="true"></div>
+    <div class="bg-particles" aria-hidden="true"></div>
+
+    <!-- Header -->
+    <header>
+      <div class="brand" onclick="location.href='index.html'">
+        <img src="logo.png" alt="TradeWR">
+        <h1>TradeWR</h1>
+      </div>
+
+      <nav aria-label="menu principal">
+        <a href="index.html">Home</a>
+        <a href="#planos">Planos</a>
+        <a href="login/index.html" target="_blank" class="cta">
+  <span class="pulse"></span>
+  Acessar a Plataforma
+</a>
+
+        <a href="login.html">Acessar Plataforma</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" aria-label="Apresentação TradeWR">
+      <div class="hero-inner">
+        <h2 class="alpha-title">Alpha Signals</h2>
+
+        <p class="hero-sub">
+          Sinais inteligentes, confirmações avançadas e ferramentas profissionais
+          para quem busca consistência no day trade.
+        </p>
+
+        <div class="cta-wrap">
+          <button class="cta" onclick="location.href='login.html'">
+            <span class="pulse" aria-hidden="true"></span>
+            Acessar Plataforma
+          </button>
+
+          <button class="cta-ghost"
+            onclick="document.getElementById('planos').scrollIntoView({behavior:'smooth'})">
+            Ver planos
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conteúdo principal -->
+    <main>
+      <div class="panel">
+
+        <!-- Benefícios -->
+        <section class="benefits-section">
+          <h2>Por que usar a TradeWR?</h2>
+          <p class="section-sub">
+            Uma plataforma criada para traders que levam o mercado a sério.
+          </p>
+
+          <div class="benefits">
+            <article class="benefit-card">
+              <h4>📈 Sinais em tempo real</h4>
+              <p>Identificação automática de oportunidades com base em estratégias validadas.</p>
+            </article>
+
+            <article class="benefit-card">
+              <h4>🧠 Confirmações avançadas</h4>
+              <p>Módulos inteligentes que aumentam a probabilidade de entradas mais seguras.</p>
+            </article>
+
+            <article class="benefit-card">
+              <h4>🔔 Alertas dinâmicos</h4>
+              <p>Receba alertas visuais e sonoros no momento certo, sem perder operações.</p>
+            </article>
+
+            <article class="benefit-card">
+              <h4>📊 Ferramentas PRO</h4>
+              <p>Gestão de risco, planilhas e recursos que ajudam a manter disciplina e controle.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- Planos -->
+        <section id="planos" class="plans-section">
+          <h2>Plano disponível</h2>
+          <p class="section-sub">
+            Um plano simples, direto e acessível para quem quer operar com apoio profissional.
+          </p>
+
+          <div class="plan-card">
+            <h3>Alpha Signals</h3>
+
+            <div class="price">
+              R$ 97
+              <span>/ mês</span>
+            </div>
+
+            <p class="plan-desc">
+              Acesso completo à plataforma, sinais ilimitados e atualizações contínuas.
+            </p>
+
+            <button class="cta" onclick="location.href='login.html'">
+              Assinar agora
+            </button>
+
+            <p class="legal-note">
+              Valores e condições podem ser alterados sem aviso prévio.
+              Ao adquirir o plano, você concorda com os termos apresentados.
+            </p>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="sitefoot">
+      <img src="logo.png" alt="TradeWR">
+      <p>© 2025 TradeWR — Todos os direitos reservados.</p>
+    </footer>
+
+  </div>
+
+  <!-- JS opcional -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
