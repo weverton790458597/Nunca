@@ -122,48 +122,52 @@
 
     <button class="start-btn" id="iniciarTrade">Iniciar Trade</button>
   </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // ================= 🔐 VERIFICA LOGIN =================
+  const auth = JSON.parse(localStorage.getItem('auth'));
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // ================= User Check =================
-      const logado = JSON.parse(localStorage.getItem('logado')) || false;
-      const nome = localStorage.getItem('nome') || '';
-      if (!logado) window.location.replace('index.html');
-      else {
-        const header = document.getElementById('userHeader');
-        if (header) header.textContent = `Bem-vindo ao TradeWR, ${nome}`;
-      }
+  if (!auth || !auth.logado) {
+    window.location.replace('/login/');
+    return;
+  }
 
-      // ================= Menu Interaction =================
-      const menuItems = document.querySelectorAll('.menu-item');
-      const sections = document.querySelectorAll('.section');
-      const placeholderLogo = document.getElementById('placeholderLogo');
+  // Atualiza última tela
+  auth.ultimaTela = 'conta';
+  localStorage.setItem('auth', JSON.stringify(auth));
 
-      menuItems.forEach(item => {
-        item.addEventListener('click', () => {
-          // Remove active de todos
-          menuItems.forEach(i => i.classList.remove('active'));
-          item.classList.add('active');
+  // Nome no header
+  const header = document.getElementById('userHeader');
+  if (header) {
+    header.textContent = `Bem-vindo ao TradeWR, ${auth.nome || ''}`;
+  }
 
-          // Esconde placeholder
-          placeholderLogo.style.display = 'none';
+  // ================= Menu Interaction =================
+  const menuItems = document.querySelectorAll('.menu-item');
+  const sections = document.querySelectorAll('.section');
+  const placeholderLogo = document.getElementById('placeholderLogo');
 
-          // Mostra seção correspondente
-          const target = item.dataset.section;
-          sections.forEach(sec => {
-            sec.style.display = sec.id === target ? 'block' : 'none';
-          });
-        });
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      placeholderLogo.style.display = 'none';
+
+      const target = item.dataset.section;
+      sections.forEach(sec => {
+        sec.style.display = sec.id === target ? 'block' : 'none';
       });
-
-      // ================= Iniciar Trade =================
-      const iniciarBtn = document.getElementById('iniciarTrade');
-      if (iniciarBtn) {
-        iniciarBtn.addEventListener('click', () => {
-          window.location.href = 'sinais.html';
-        });
-      }
     });
-  </script>
+  });
+
+  // ================= Iniciar Trade =================
+  const iniciarBtn = document.getElementById('iniciarTrade');
+  if (iniciarBtn) {
+    iniciarBtn.addEventListener('click', () => {
+      window.location.href = '/sinais/';
+    });
+  }
+});
+</script>
+
 </body>
 </html>
+
