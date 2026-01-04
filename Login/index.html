@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Responsivo -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/icon16.png" type="image/png">
+  <!-- SEO básico -->
+  <meta name="description" content="Acesse sua conta TradeWR e opere no mercado financeiro com inteligência e precisão.">
+  <meta name="author" content="TradeWR">
+
+  <title>Login • TradeWR</title>
+
+  <!-- CSS externo -->
+  <link rel="stylesheet" href="login.css">
+
+  <!-- Fonte (opcional, mas já deixo preparado) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Background visual (efeitos depois via CSS) -->
+  <div class="background"></div>
+
+  <!-- Container principal -->
+  <main class="container">
+
+    <!-- Card de login -->
+    <section class="login-card">
+
+      <!-- Logo -->
+      <header class="logo">
+        <img src="icon16.png" alt="TradeWR">
+      </header>
+
+      <!-- Título -->
+      <h1 class="titulo">TradeWR</h1>
+      <p class="instrucao">
+        Acesse sua conta e opere com precisão no mercado
+      </p>
+
+      <!-- Formulário -->
+      <form class="form-login" autocomplete="off">
+
+        <!-- Email -->
+        <div class="campo">
+          <label for="email">E-mail</label>
+          <input
+            type="text"
+            id="email"
+            placeholder="seu@email.com"
+          >
+        </div>
+
+        <!-- Senha -->
+        <div class="campo senha-wrapper">
+          <label for="senha">Senha</label>
+          <input
+            type="password"
+            id="senha"
+            placeholder="Digite sua senha"
+          >
+
+          <!-- Toggle senha -->
+          <svg
+            id="toggleSenha"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            aria-label="Mostrar ou ocultar senha"
+          >
+            <path d="M12 5c-7.633 0-12 7-12 7s4.367 7 12 7 12-7 12-7-4.367-7-12-7zm0 12a5 5 0 110-10 5 5 0 010 10zm0-8a3 3 0 100 6 3 3 0 000-6z"/>
+          </svg>
+        </div>
+
+        <!-- Botão -->
+        <button type="button" id="entrar">
+          Entrar na plataforma
+        </button>
+
+        <!-- Mensagem de erro -->
+        <div class="erro" id="erro"></div>
+
+      </form>
+
+      <!-- Rodapé -->
+      <footer class="footer-login">
+        <span>Não tem uma conta?</span>
+        <a href="https://www.tradewr.shop/" target="_blank">
+          Criar agora
+        </a>
+      </footer>
+
+    </section>
+
+  </main>
+
+  <!-- Script -->
+  <script src="login.js"></script>
+
+</body>
+</html>
