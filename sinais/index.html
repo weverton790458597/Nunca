@@ -1,135 +1,486 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Sinais</title>
-    <link rel="stylesheet" href="sinais.css">
-	<link rel="icon" href="/icon16.png" type="image/png">
-</head>
-<body>
-  <div id="overlayTela"> 
-    <div id="botao-voltar">Voltar</div>
-	<div id="alarmeToggle" title="Alarme" ><div class="bolinha"></div></div>
-    <div id="logo-container">
-  <img id="logo" src="/icon16.png" alt="Logo">
-  <span id="site-nome">Acesse: tradewr.shop</span>  
-  
-   <!-- Botão de Configuração -->
-<button id="btnConfiguracao" style="
-    position: fixed;
-    top: 6px;
-    right: 10px;
-    z-index: 10000;
-    font-size: 18px;
-    padding: 2px 2px;
-    border-radius: 5px;
-    border: 2px solid #333; /* borda escura */
-    background: rgba(20, 20, 20, 0.8); /* vidro escuro */
-    color: white;
-    cursor: pointer;
-">⚙️</button>
+/* ==============================
+   TradeWR Overlay - CSS Consolidado
+   Suporte: vertical, horizontal, diagonal
+   ============================== */
+
+/* === Base da página === */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 362px;
+  height: 555px;
+  font-family: Arial, sans-serif;
+  background-color: #111;
+  color: white;
+  overflow: hidden; /* permite scroll se necessário */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* === Tela principal (overlay) === */
+#overlayTela {
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+
+  background-color: rgba(20,20,20,0.95);
+  border: 2px solid gold;
+  border-radius: 16px;
+  padding: 20px;
+
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  transition: all 0.3s ease;
+}
 
 
 
-<!-- Overlay de Configurações (inicialmente escondido) -->
-<div id="configOverlay" style="
-    display:none;
-    position:fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background:rgba(0,0,0,0.85);
-    z-index:9999;
-    color:white;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-">
-  <div style="background:#222; padding:20px; border-radius:8px; min-width:300px; max-width:90%;">
-    <h2 style="margin:0 0 8px 0;">Configurações</h2>
+/* === Container da logo === */
+#logo-container {
+  position: relative;
+  width: 300px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
-    <!-- SEÇÃO: Telegram -->
-    <div style="margin-bottom:14px;">
-      <button id="btnInserirID" style="margin-top:6px;">ID Telegram</button>
-      <div id="telegramIdContainer" style="margin-top:10px; display:none;">
-          <input type="text" id="telegramIdInput" placeholder="Digite seu ID" style="width:170px; margin-right:6px;">
-          <button id="salvarTelegramIdBtn">Salvar</button>
-          <span id="telegramIdStatus" style="margin-left:8px;color:limegreen;"></span>
-      </div>
-    </div>
+/* === Logo === */
+#logo-container img {
+  width: 50px;
+  height: 50px;
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
 
-    <div style="display:flex; gap:8px; margin-top:12px;">
-      <button id="fecharConfig" style="flex:1;">Fechar</button>
-    </div>
-  </div>
-</div>
+/* === Texto alternado === */
+#site-nome {
+  position: absolute;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff; /* texto branco puro */
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
 
- 
- 
-<!-- Espaçador fantasma para manter o layout -->
-<div style="
-    position: fixed;
-    top: 6px;
-    right: 6px;
-    width: 22px;
-    height: 22px;
-    pointer-events: none;
-"></div>
+  white-space: nowrap; /* impede quebra de linha */
+  overflow: hidden;
+}
 
-  
-</div>
- 
-  
-<div id="pairsControl">
-  <div class="pairWrap">
-    <div class="scoreDot" id="score-BTCUSDT">0x0</div>
-    <div class="winDot" id="dot-BTCUSDT">0%</div>
-    <button class="pairBtn" data-pair="BTCUSDT" title="Clique Para Ativar/Desativar a Paridade">BTCUSDT</button>
-  </div>
+/* === Reflexo dinâmico no texto (estilo botão) === */
+#site-nome::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 300%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 40%,
+    rgba(255,255,255,0.4) 50%,
+    rgba(255,255,255,0) 60%
+  );
+  pointer-events: none;
+  animation: lightSweepText 4s ease-in-out infinite;
+}
 
-  <div class="pairWrap">
-    <div class="scoreDot" id="score-ETHUSDT">0x0</div>
-    <div class="winDot" id="dot-ETHUSDT">0%</div>
-    <button class="pairBtn" data-pair="ETHUSDT" title="Clique Para Ativar/Desativar a Paridade">ETHUSDT</button>
-  </div>
+/* === Animação do reflexo === */
+@keyframes lightSweepText {
+  0% { transform: translateX(-100%); opacity: 0; }
+  25% { opacity: 0.4; }
+  50% { transform: translateX(100%); opacity: 0.3; }
+  75% { opacity: 0.5; }
+  100% { transform: translateX(-100%); opacity: 0; }
+}
 
-  <div class="pairWrap">
-    <div class="scoreDot" id="score-BNBUSDT">0x0</div>
-    <div class="winDot" id="dot-BNBUSDT">0%</div>
-    <button class="pairBtn" data-pair="BNBUSDT" title="Clique Para Ativar/Desativar a Paridade">BNBUSDT</button>
-  </div>
+/* === Quando o texto estiver ativo === */
+#site-nome.visivel {
+  opacity: 1;
+  transform: scale(1);
+}
 
-  <div class="pairWrap">
-    <div class="scoreDot" id="score-SOLUSDT">0x0</div>
-    <div class="winDot" id="dot-SOLUSDT">0%</div>
-    <button class="pairBtn" data-pair="SOLUSDT" title="Clique Para Ativar/Desativar a Paridade">SOLUSDT</button>
-  </div>
-</div>
+/* === Logo oculto === */
+#logo.oculto {
+  opacity: 0;
+  transform: scale(0.8);
+}
 
+/* === Linha superior indicadores === */
+.linha-superior {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.indicador { flex: 1; text-align: center; font-size: 14px; font-weight: bold; }
+.bb-superior { color: red; }
+.ema { color: blue; }
+.bb-inferior { color: limegreen; }
 
-    <div class="linha-superior">
-      <div class="indicador bb-superior">---</div>
-      <div class="indicador ema">---</div>
-	  <div class="indicador rsi" id="rsiValor">--</div>
-      <div class="indicador bb-inferior">---</div>
-    </div>
-     
-    <div class="linha-central">
-      <div id="ultimoFechamento">---</div>
-      <div id="sinalCentral">
-        <div class="seta" style="display:none;"></div>
-        <div class="textoSinal">Aguardando sinal</div>
-        <div class="horarioSinal"></div>
-      </div>
-      <div id="precoAtual">0.00</div>
-    </div>
+/* === Linha central === */
+.linha-central {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 80px;
+}
+#ultimoFechamento { font-size: 14px; }
+#precoAtual { font-size: 18px; font-weight: bold; }
 
-  <script src="modulo3.js"></script>
-  <script src="sinais.js"></script>
+#sinalCentral {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.seta { font-size: 28px; transition: color 0.3s ease; }
+.textoSinal { margin-top: 4px; font-size: 12px; }
+.horarioSinal { margin-top: 2px; font-size: 11px; color: #ddd; }
 
-</body>
-</html>
+/* === Animação pulsar === */
+@keyframes pulsar {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+.pulsar { animation: pulsar 0.7s infinite; }
 
+/* === Botão vidro escuro com reflexos dinâmicos e respiração === */
+.module-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  background: rgba(30, 30, 30, 0.6);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: inset 0 0 6px rgba(255,255,255,0.05), 0 6px 16px rgba(0,0,0,0.6);
+  transition: all 0.3s ease;
+  animation: pulse 4s ease-in-out infinite;
+}
 
+/* === Reflexos dinâmicos múltiplos === */
+.module-btn::before,
+.module-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 60%);
+  transform: rotate(25deg);
+  pointer-events: none;
+}
 
+/* Cada reflexo tem animação diferente */
+.module-btn::before {
+  animation: lightSweep1 6s ease-in-out infinite;
+}
+.module-btn::after {
+  animation: lightSweep2 8s ease-in-out infinite;
+}
 
+/* Animações dos reflexos */
+@keyframes lightSweep1 {
+  0% { transform: translateX(-150%) rotate(25deg); opacity: 0; }
+  25% { opacity: 0.4; }
+  50% { transform: translateX(150%) rotate(25deg); opacity: 0.3; }
+  75% { opacity: 0.5; }
+  100% { transform: translateX(-150%) rotate(25deg); opacity: 0; }
+}
+
+@keyframes lightSweep2 {
+  0% { transform: translateY(-150%) rotate(-20deg); opacity: 0; }
+  30% { opacity: 0.3; }
+  60% { transform: translateY(150%) rotate(-20deg); opacity: 0.4; }
+  90% { opacity: 0.2; }
+  100% { transform: translateY(-150%) rotate(-20deg); opacity: 0; }
+}
+
+/* Respiração do botão */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+/* Hover - brilho extra */
+.module-btn:hover {
+  box-shadow: inset 0 0 10px rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.7), 0 0 16px rgba(255,255,255,0.12);
+  transform: scale(1.08);
+}
+
+/* Clique - feedback sutil */
+.module-btn:active {
+  transform: scale(0.96);
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.4);
+}
+
+/* === Container pai dos módulos === */
+#modulos-container {
+  display: flex;
+  flex-direction: row; /* empilha os módulos */
+  gap: 6px;
+  margin-top: 12px;
+  display: none; /* inicialmente escondido */
+  width: 100%; /* ocupa a largura total do overlay */
+  justify-content: center;
+  align-items: center;
+}
+
+/* === Containers individuais de módulos === */
+.modulo-container {
+  background-color: rgba(20,20,20,0.95);
+  border: 2px solid gold;
+  border-radius: 8px;
+  width: 0px; /* JS controla largura */
+  height: 0px;  /* JS controla altura */
+  min-width: 0px /* largura mínima */
+  min-height: 0px /* altura mínima */
+  max-width: 100%;   /* nunca ultrapassa o overlay */
+  max-height: 90vh;  /* evita que fique maior que a tela */
+  padding: 8px;
+  font-family: monospace;
+  color: white;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: none;
+}
+
+.modulo-container.expandido {
+  min-height: 260px;
+  width: 10px;
+  overflow-y: auto;
+}
+
+/* === Botão voltar === */
+#botao-voltar {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: blue;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 1000;
+  transition: background-color 0.2s;
+}
+#botao-voltar:hover { background-color: #34495e; } 
+
+/* === Botão Gerenciamento UX Premium === */
+#botao-gerenciamento {
+  position: fixed;
+  top: 9px;
+  left: 70px;
+  padding: 3px 6.5px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  color: #fff;
+  background-color: rgba(40,40,40,0.6); /* vidro escuro translúcido */
+  backdrop-filter: blur(8px); /* efeito vidro */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+/* === Reflexo dinâmico estilo botão === */
+#botao-gerenciamento::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 300%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 40%,
+    rgba(255,255,255,0.3) 50%,
+    rgba(255,255,255,0) 60%
+  );
+  pointer-events: none;
+  animation: lightSweepBtn 4s ease-in-out infinite;
+}
+
+/* === Animação do reflexo === */
+@keyframes lightSweepBtn {
+  0% { transform: translateX(-100%); opacity: 0; }
+  25% { opacity: 0.4; }
+  50% { transform: translateX(100%); opacity: 0.3; }
+  75% { opacity: 0.5; }
+  100% { transform: translateX(-100%); opacity: 0; }
+}
+
+/* === Hover e Active com efeito sutil === */
+#botao-gerenciamento:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+#botao-gerenciamento:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+/* === Toggle de alarme === */
+#alarmeToggle {
+  position: absolute;
+  top: 8px;
+  right: 46px;
+  width: 36px;
+  height: 18px;
+  background-color: #444;
+  border-radius: 9px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 1px;
+}
+#alarmeToggle .bolinha {
+  width: 16px;
+  height: 16px;
+  background-color: red;
+  border-radius: 50%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+#alarmeToggle.on .bolinha {
+  transform: translateX(18px);
+  background-color: limegreen;
+}
+
+/* Container principal */
+#pairsControl {
+  margin-top: 10px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Cada par */
+.pairWrap {
+  position: relative;
+  display: inline-block;
+}
+
+/* Pontos de score */
+.scoreDot {
+  position: absolute;
+  top: -20px;
+  left: 3px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6),
+              0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Pontos de vitória */
+.winDot {
+  position: absolute;
+  top: -20px;
+  right: 3px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  pointer-events: none;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6),
+              0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Botões */
+.pairBtn {
+  padding: 6px 10px;
+  border-radius: 12px;
+  background: rgba(40, 40, 40, 0.6);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.05);
+}
+
+/* Efeito de luz passando */
+.pairBtn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 300%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 40%,
+    rgba(255,255,255,0.12) 50%,
+    rgba(255,255,255,0) 60%
+  );
+  pointer-events: none;
+  animation: lightSweep 4s ease-in-out infinite;
+}
+
+@keyframes lightSweep {
+  0% { transform: translateX(-100%); opacity: 0; }
+  25% { opacity: 0.3; }
+  50% { transform: translateX(100%); opacity: 0.2; }
+  75% { opacity: 0.4; }
+  100% { transform: translateX(-100%); opacity: 0; }
+}
+
+/* Hover */
+.pairBtn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+/* Estado ativo */
+.pairBtn.active {
+  background: rgba(38, 201, 38, 0.8);
+  color: #fff;
+  box-shadow: none;
+}
