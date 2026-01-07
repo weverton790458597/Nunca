@@ -706,7 +706,7 @@ window.addEventListener('sinalModulo', (e) => {
   if (voltarBtn) {
     voltarBtn.addEventListener("click", () => {
       chrome.storage.local.set({ ultimaTela: '', estrategiaSelecionada: null }, () => {
-        window.location.href = "/conta/";
+        window.location.href = "/login/";
       });
     });
   }
@@ -858,6 +858,7 @@ setInterval(verificarWinRateAlert, 10000);
 
 
 })();
+
 
 
 
