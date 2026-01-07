@@ -1,21 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ================= 🔐 VERIFICA LOGIN =================
-  const auth = JSON.parse(localStorage.getItem('auth'));
+  const auth = JSON.parse(sessionStorage.getItem('auth'));
 
-  if (!auth || !auth.logado) {
+  if (!auth?.logado) {
     window.location.replace('/login/');
     return;
   }
-
-  // Atualiza última tela
-  auth.ultimaTela = 'conta';
-  localStorage.setItem('auth', JSON.stringify(auth));
 
   // Nome no header
   const header = document.getElementById('userHeader');
   if (header) {
     header.textContent = `Bem-vindo ao TradeWR, ${auth.nome || ''}`;
   }
+});
+
 
   // ================= Menu Interaction =================
   const menuItems = document.querySelectorAll('.menu-item');
@@ -41,3 +39,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
