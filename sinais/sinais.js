@@ -370,9 +370,9 @@ const divRSI = document.getElementById("rsiValor");
 if (rsi !== null && divRSI) {
     divRSI.textContent = "" + rsi.toFixed(2);
 
-    if (rsi >= 55) {
+    if (rsi >= 70) {
         divRSI.style.color = "#ff3434"; // vermelho (sobrecompra)
-    } else if (rsi <= 45) {
+    } else if (rsi <= 30) {
         divRSI.style.color = "#00ff7b"; // verde (sobrevenda)
     } else {
         divRSI.style.color = "white"; // neutro
@@ -546,7 +546,7 @@ async function gerarSinal(symbol, velaIndex = null, precoAtual = null) {
     if (
         preco <= bb.inferior &&
         emaDentro &&
-        rsi <= 45
+        rsi <= 30
     ) {
         sinalAtual = 'compra';
     }
@@ -555,7 +555,7 @@ async function gerarSinal(symbol, velaIndex = null, precoAtual = null) {
     else if (
         preco >= bb.superior &&
         emaDentro &&
-        rsi >= 55
+        rsi >= 70
     ) {
         sinalAtual = 'venda';
     }
@@ -859,6 +859,7 @@ setInterval(verificarWinRateAlert, 10000);
 
 
 })();
+
 
 
 
