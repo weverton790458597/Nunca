@@ -57,17 +57,16 @@ function chromeGetPromise(area, keys) {
 	// =====================================
 // 🔐 PROTEÇÃO DE ACESSO — TELA DE SINAIS
 // =====================================
-const auth = JSON.parse(localStorage.getItem('auth'));
+// =====================================
+// 🔐 PROTEÇÃO DE ACESSO — TELA DE SINAIS
+// =====================================
+const auth = JSON.parse(sessionStorage.getItem('auth'));
 
-if (!auth || !auth.logado) {
-  // não está logado → volta pro login
+if (!auth?.logado) {
   window.location.replace('/login/');
   return;
 }
 
-// marca última tela corretamente
-auth.ultimaTela = 'sinais';
-localStorage.setItem('auth', JSON.stringify(auth));
 
 	let audioLiberado = false;
 
@@ -859,6 +858,7 @@ setInterval(verificarWinRateAlert, 10000);
 
 
 })();
+
 
 
 
