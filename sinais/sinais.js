@@ -712,7 +712,9 @@ window.addEventListener('sinalModulo', (e) => {
   }
 
 if (iaBtn) {
-  iaBtn.addEventListener("click", () => {
+  iaBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
     sessionStorage.setItem(
       "estadoPainel",
       JSON.stringify({
@@ -721,7 +723,7 @@ if (iaBtn) {
       })
     );
 
-    window.open("/conta/", "_blank");
+    window.open("/conta/", "_blank", "noopener,noreferrer");
   });
 }
 ////////////////////////fim da Função/////////////////////////
@@ -864,6 +866,7 @@ setInterval(verificarWinRateAlert, 10000);
 
 
 })();
+
 
 
 
