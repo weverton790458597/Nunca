@@ -126,7 +126,7 @@ chrome.storage.sync.get({ enabledPairs: defaultPairs }, data => {
   
 
   const voltarBtn = document.getElementById("botao-voltar");
-  const iaBtn = document.getElementById("botao-ia");
+  const iaBtn = document.getElementById("iaBtn");
   const btnRefresh = document.getElementById('botao-refresh'); 
   chrome.storage.local.set({ ultimaTela: 'overlay' });
 
@@ -711,13 +711,16 @@ window.addEventListener('sinalModulo', (e) => {
     });
   }
 
-   if (iaBtn) {
-    iaBtn.addEventListener("click", () => {
-      chrome.storage.local.set({ ultimaTela: '', estrategiaSelecionada: null }, () => {
+  if (iaBtn) {
+  iaBtn.addEventListener("click", () => {
+    chrome.storage.local.set(
+      { ultimaTela: '', estrategiaSelecionada: null },
+      () => {
         window.location.href = "/conta/";
-      });
-    });
-  }
+      }
+    );
+  });
+}
 ////////////////////////fim da Função/////////////////////////
 
   setInterval(()=>{
@@ -858,6 +861,7 @@ setInterval(verificarWinRateAlert, 10000);
 
 
 })();
+
 
 
 
