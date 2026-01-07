@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const auth = JSON.parse(sessionStorage.getItem('auth'));
 
   if (!auth?.logado) {
-    window.location.replace('/login/');
+    window.location.replace('');
     return;
   }
 
@@ -37,3 +37,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
