@@ -466,28 +466,29 @@ function mostrarSinal(tipo, origem = null) {
   }
 
   
- // === Aqui é onde você coloca o Telegram ===
+// === Aqui é onde você coloca o Telegram ===
 if (typeof window.enviarTelegram === 'function') {
-  const msg = `📌 *SINAL DISPONÍVEL*
+
+  const msg = 
+`📌 *SINAL DISPONÍVEL - Acesse: https://tradewr.shop*
 
 ${tipo === 'compra' ? '🚀 *COMPRA*' : '📉 *VENDA*'}
 
-*Ativo:* ${origem}
+*Ativo:* \`${origem}\`
 *Status:* Entrar Agora
 
 ⏱ ${new Date().toLocaleTimeString('pt-BR', {hour12:false})}
+`;
 
-💡 Acompanhe mais sinais e oportunidades em: tradewr.shop`;
-  
   window.enviarTelegram(msg);
 }
 
 
-hideTimeout = setTimeout(() => {
-  aguardando = true;
-  ponto = 0;
-  seta.classList.remove('pulsar');
-}, 30000);
+  hideTimeout = setTimeout(() => {
+    aguardando = true;
+    ponto = 0;
+    seta.classList.remove('pulsar');
+  }, 30000);
 }
 
 // ======================================================
@@ -794,9 +795,7 @@ function verificarWinRateAlert() {
 
     if (winRate >= 0.7) {
       if (!winRateAlertSent[sym]) {
-        const msg = `⚠️ WinRate ${Math.round(winRate * 100)}% em ${sym}! Fique atento(a) a possíveis sinais.
-
-💡 Confira mais análises e sinais em: tradewr.shop`;
+        const msg = `⚠️ WinRate ${Math.round(winRate * 100)}% em ${sym}! Fique atento(a) a possíveis sinais. Acesse: https://tradewr.shop`;
 
 
         // som
@@ -852,6 +851,7 @@ setInterval(verificarWinRateAlert, 10000);
 
 
 })();
+
 
 
 
