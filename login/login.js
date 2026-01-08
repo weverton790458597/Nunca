@@ -49,6 +49,13 @@ function validarLogin() {
         // Checa dias para vencimento
         const diffDias = calcularDiasParaVencimento();
 
+          // NOVO: verifica status do usuário
+  const status = data.status || ""; // vindo da coluna E do App Script
+  if (status.toLowerCase() === "bloqueado") {
+    mostrarBloqueioTotal();
+    return; // sai do login, não vai pros sinais
+  }
+
         if (diffDias < 0) {
           // Passou do vencimento → bloqueio total
           mostrarBloqueioTotal();
@@ -148,4 +155,5 @@ senhaInput.addEventListener('keypress', e => {
 toggleSenha.addEventListener('click', () => {
   senhaInput.type = senhaInput.type === 'password' ? 'text' : 'password';
 });
+
 
