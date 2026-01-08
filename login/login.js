@@ -104,17 +104,24 @@ function calcularDiasParaVencimento() {
 function mostrarAvisoPagamento(diffDias) {
   const overlay = document.createElement('div');
   overlay.id = 'overlayPagamento';
+
+  // Mensagem personalizada se for o mesmo dia
+  const mensagem = diffDias === 0
+    ? 'Seu dia de vencimento é hoje! Realize o pagamento para não ficar inadimplente.'
+    : `Seu acesso vence em ${diffDias} dia(s). Realize o pagamento para não ficar inadimplente.`;
+
   overlay.innerHTML = `
     <div class="overlay-content">
       <h2>⚠️ Atenção ao vencimento</h2>
-      <p>Seu acesso vence em ${diffDias} dia(s). Realize o pagamento para não ficar inadimplente.</p>
+      <p>${mensagem}</p>
       <p class="observacao">Caso já tenha realizado o pagamento, ignore esta mensagem.</p>
       <div class="botoes">
-        <a href="https://mpago.la/2CcTCuj" target="_blank" class="btn-pagar">Pagar agora</a>
+        <a href="https://linkfixo.com/mercadopago" target="_blank" class="btn-pagar">Pagar agora</a>
         <button id="continuarBtn" class="btn-continuar">Continuar</button>
       </div>
     </div>
   `;
+
   document.body.appendChild(overlay);
 
   // Botão continuar fecha overlay e vai pra tela
@@ -123,6 +130,7 @@ function mostrarAvisoPagamento(diffDias) {
     window.location.href = '/sinais/';
   });
 }
+
 
 // ================================
 // Overlay de bloqueio total após vencimento
@@ -165,6 +173,7 @@ senhaInput.addEventListener('keypress', e => {
 toggleSenha.addEventListener('click', () => {
   senhaInput.type = senhaInput.type === 'password' ? 'text' : 'password';
 });
+
 
 
 
