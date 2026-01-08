@@ -82,16 +82,21 @@ function validarLogin() {
 // ================================
 function calcularDiasParaVencimento() {
   const hoje = new Date();
-  let venc = new Date(hoje.getFullYear(), hoje.getMonth(), DIA_VENCIMENTO);
+  const venc = new Date(hoje.getFullYear(), hoje.getMonth(), DIA_VENCIMENTO);
 
-  // Se hoje já passou do dia do mês, considera próximo mês
+  // Ajusta para o próximo mês se já passou do dia
   if (hoje.getDate() > DIA_VENCIMENTO) {
-    venc = new Date(hoje.getFullYear(), hoje.getMonth() + 1, DIA_VENCIMENTO);
+    venc.setMonth(venc.getMonth() + 1);
   }
 
-  const diff = Math.ceil((venc - hoje) / (1000 * 60 * 60 * 24));
+  // Zera horas/minutos/segundos para comparação exata
+  const hojeZero = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+  const vencZero = new Date(venc.getFullYear(), venc.getMonth(), venc.getDate());
+
+  const diff = Math.ceil((vencZero - hojeZero) / (1000 * 60 * 60 * 24));
   return diff;
 }
+
 
 // ================================
 // Overlay de aviso antes do vencimento
@@ -160,6 +165,7 @@ senhaInput.addEventListener('keypress', e => {
 toggleSenha.addEventListener('click', () => {
   senhaInput.type = senhaInput.type === 'password' ? 'text' : 'password';
 });
+
 
 
 
