@@ -1,7 +1,7 @@
 // ================================
 // CONFIGURAÇÕES DE PAGAMENTO
 // ================================
-const DIA_VENCIMENTO = 6; // Dia fixo de vencimento do mês
+const DIA_VENCIMENTO = 10; // Dia fixo de vencimento do mês
 const DIAS_AVISO = 3;      // Quantos dias antes do vencimento mostrar aviso
 
 // 🔐 Força login apenas quando acessar o /login diretamente
@@ -160,6 +160,7 @@ senhaInput.addEventListener('keypress', e => {
 toggleSenha.addEventListener('click', () => {
   senhaInput.type = senhaInput.type === 'password' ? 'text' : 'password';
 });
+
 
 
 
