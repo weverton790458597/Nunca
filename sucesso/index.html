@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pagamento Concluído</title>
+<link rel="icon" type="image/png" sizes="16x16" href="icon16.png">
+
+<style>
+  /* ===============================
+     VARIÁVEIS DE CORES
+  =============================== */
+  :root {
+    --bg-main: #0b0e14;
+    --bg-card: #141a24;
+    --text-main: #e8ecf1;
+    --text-muted: #9aa4b2;
+    --primary: #2ecc71;
+    --primary-dark: #27ae60;
+    --success: #00c853;
+    --danger: #ff5f5f;
+  }
+
+  /* ===============================
+     RESET & BODY
+  =============================== */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: radial-gradient(circle at top, #141a24, #0b0e14 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+  }
+
+  /* ===============================
+     CONTAINER
+  =============================== */
+  .container {
+    background: var(--bg-card);
+    padding: 40px 36px;
+    border-radius: 18px;
+    border: 1px solid #263044;
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    animation: fadeUp 0.5s ease;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ===============================
+     ÍCONE DE SUCESSO
+  =============================== */
+  .icon-success {
+    font-size: 64px;
+    color: var(--success);
+    margin-bottom: 24px;
+  }
+
+  /* ===============================
+     TÍTULO
+  =============================== */
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  /* ===============================
+     TEXTO
+  =============================== */
+  p {
+    font-size: 0.95rem;
+    color: #ccc;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .highlight {
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  /* ===============================
+     LINK DO SUPORTE
+  =============================== */
+  .suporte a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+
+  .suporte a:hover {
+    color: var(--primary-dark);
+  }
+
+  /* ===============================
+     BOTÃO VOLTAR / ACESSO
+  =============================== */
+  .btn-home {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 14px 22px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #0b0e14;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-home:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(46, 204, 113, 0.35);
+  }
+
+  /* ===============================
+     MOBILE
+  =============================== */
+  @media (max-width: 480px) {
+    .container {
+      margin: 0 16px;
+      padding: 32px 24px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .icon-success {
+      font-size: 48px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon-success">✅</div>
+    <h1>Pagamento Realizado!</h1>
+    <p>Recebemos a confirmação do seu pagamento com sucesso.</p>
+    <p>Seu acesso será liberado em até <span class="highlight">3 horas</span> após a verificação do pagamento.</p>
+    <p>Se após esse período o acesso não for liberado, entre em contato com o suporte.</p>
+    <p class="suporte">
+      Contate o suporte: <a href="https://t.me/trade_wr" target="_blank">@TradeWR</a>
+    </p>
+    <a href="/login/" class="btn-home">Voltar para Login</a>
+  </div>
+</body>
+</html>
