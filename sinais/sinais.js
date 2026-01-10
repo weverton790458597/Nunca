@@ -494,7 +494,7 @@ ${tipo === 'compra' ? '🚀 *COMPRA*' : '📉 *VENDA*'}
 // ======================================================
 // 🚀 Função gerarSinal() — Versão CLEAN, rápida e direta
 // ======================================================
-const COOLDOWN_MS = 600000; // ajuste se quiser 3s => 3000
+const COOLDOWN_MS = 120000; // ajuste se quiser 3s => 3000
 
 async function gerarSinal(symbol, velaIndex = null, precoAtual = null) {
 
@@ -851,6 +851,7 @@ setInterval(verificarWinRateAlert, 10000);
 
 
 })();
+
 
 
 
